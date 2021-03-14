@@ -16,6 +16,10 @@
 		B37EE57D25FC1F2800C79013 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE57C25FC1F2800C79013 /* LoginRequest.swift */; };
 		B37EE58125FC20FF00C79013 /* UdacityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE58025FC20FF00C79013 /* UdacityResponse.swift */; };
 		B37EE58425FC241200C79013 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE58325FC241200C79013 /* UdacityClient.swift */; };
+		B37EE58A25FC57E900C79013 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE58925FC57E900C79013 /* StudentLocation.swift */; };
+		B37EE58D25FCE23900C79013 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE58C25FCE23900C79013 /* MapViewController.swift */; };
+		B37EE59125FCE64D00C79013 /* StudentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE59025FCE64D00C79013 /* StudentModel.swift */; };
+		B37EE59725FD204300C79013 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE59625FD204300C79013 /* ListTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		B37EE57C25FC1F2800C79013 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		B37EE58025FC20FF00C79013 /* UdacityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityResponse.swift; sourceTree = "<group>"; };
 		B37EE58325FC241200C79013 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		B37EE58925FC57E900C79013 /* StudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		B37EE58C25FCE23900C79013 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B37EE59025FCE64D00C79013 /* StudentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentModel.swift; sourceTree = "<group>"; };
+		B37EE59625FD204300C79013 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +94,8 @@
 			children = (
 				B37EE56125FC03C500C79013 /* SceneDelegate.swift */,
 				B37EE56325FC03C500C79013 /* LoginViewController.swift */,
+				B37EE58C25FCE23900C79013 /* MapViewController.swift */,
+				B37EE59625FD204300C79013 /* ListTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -93,11 +103,21 @@
 		B37EE57725FC17C200C79013 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B37EE58F25FCE63900C79013 /* Data */,
 				B37EE57C25FC1F2800C79013 /* LoginRequest.swift */,
 				B37EE58025FC20FF00C79013 /* UdacityResponse.swift */,
 				B37EE58325FC241200C79013 /* UdacityClient.swift */,
+				B37EE58925FC57E900C79013 /* StudentLocation.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B37EE58F25FCE63900C79013 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B37EE59025FCE64D00C79013 /* StudentModel.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,11 +191,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B37EE56425FC03C500C79013 /* LoginViewController.swift in Sources */,
+				B37EE59125FCE64D00C79013 /* StudentModel.swift in Sources */,
 				B37EE56025FC03C500C79013 /* AppDelegate.swift in Sources */,
+				B37EE59725FD204300C79013 /* ListTableViewController.swift in Sources */,
+				B37EE58A25FC57E900C79013 /* StudentLocation.swift in Sources */,
 				B37EE58425FC241200C79013 /* UdacityClient.swift in Sources */,
 				B37EE56225FC03C500C79013 /* SceneDelegate.swift in Sources */,
 				B37EE57D25FC1F2800C79013 /* LoginRequest.swift in Sources */,
 				B37EE58125FC20FF00C79013 /* UdacityResponse.swift in Sources */,
+				B37EE58D25FCE23900C79013 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

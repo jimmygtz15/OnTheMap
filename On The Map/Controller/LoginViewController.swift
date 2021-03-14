@@ -9,12 +9,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var loginButton: UIButton!
-    
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,6 +23,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UdacityClient.getStudentLocation() { student, error in
+            StudentModel.students = student
+            print(StudentModel.students)
+            print("HERE IS THE STUDENT MODEL")
+//            self.tableView.reloadData()
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -49,16 +53,22 @@ class LoginViewController: UIViewController {
     func isLoggingIn(_ loggingIn: Bool) {
         if loggingIn {
             DispatchQueue.main.async {
-                print("disable the buttons")
-
+                self.activityIndicator.startAnimating()
+                self.loginButton.isEnabled = false
             }
         } else {
             DispatchQueue.main.async {
-                print("enable the buttons")
-
+                self.activityIndicator.stopAnimating()
+                self.loginButton.isEnabled = true
+                
             }
         }
-        
+        DispatchQueue.main.async {
+            self.emailTextField.isEnabled = !loggingIn
+            self.passwordTextField.isEnabled = !loggingIn
+            self.loginButton.isEnabled = !loggingIn
+            self.signUpButton.isEnabled = !loggingIn
+        }
     }
 
     

@@ -21,17 +21,55 @@ class UdacityClient {
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
         case login
+        case location
         
         var stringValue: String {
             switch self {
             case .login:
                 return Endpoints.base + "/session"
+            case .location:
+                return Endpoints.base + "/StudentLocation"
             }
         }
         var url: URL {
             return URL(string: stringValue)!
         }
     }
+    
+    
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionDataTask {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(ResponseType.self, from: data)
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
+            } catch {
+                do {
+//                    let errorResponse = try decoder.decode(TMDBResponse.self, from: data) as Error
+//                    DispatchQueue.main.async {
+//                        completion(nil, errorResponse)
+//                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                }
+            }
+        }
+        task.resume()
+        
+        return task
+    }
+    
+    
     // MARK: - Post Request
     class func taskForPOSTRequest<ResponseType: Decodable>(url: URL, apiType: String, responseType: ResponseType.Type, body: String, httpMethod: String, completion: @escaping (ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
@@ -100,5 +138,21 @@ class UdacityClient {
             }
         }
     }
+    
+    
+    
+    class func getStudentLocation(completion: @escaping ([Result], Error?) -> Void) {
+        
+        taskForGETRequest(url: Endpoints.location.url, responseType: StudentLocation.self) { response, error in
+            if let response = response {
+                completion(response.results, nil)
+//                print(response.results)
+            } else {
+                completion([], error)
+            }
+        }
+        
+    }
+    
     
 }
