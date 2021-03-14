@@ -40,13 +40,11 @@ class LoginViewController: UIViewController {
     func handleLoginResponse(success: Bool, error: Error?) {
         isLoggingIn(false)
         if success {
-            print("logged in successfully")
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "login", sender: nil)
             }
         } else {
-            print("invalid credentials")
-
+            showAlert(message: "Please enter valid credentials.", title: "Login Error")
         }
     }
     
@@ -69,6 +67,13 @@ class LoginViewController: UIViewController {
             self.loginButton.isEnabled = !loggingIn
             self.signUpButton.isEnabled = !loggingIn
         }
+    }
+    
+    
+    func showAlert(message: String, title: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertVC, animated: true)
     }
 
     
