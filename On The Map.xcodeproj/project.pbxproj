@@ -20,6 +20,7 @@
 		B37EE58D25FCE23900C79013 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE58C25FCE23900C79013 /* MapViewController.swift */; };
 		B37EE59125FCE64D00C79013 /* StudentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE59025FCE64D00C79013 /* StudentModel.swift */; };
 		B37EE59725FD204300C79013 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE59625FD204300C79013 /* ListTableViewController.swift */; };
+		B37EE59E25FE9C0400C79013 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37EE59D25FE9C0400C79013 /* InformationPostingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		B37EE58C25FCE23900C79013 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B37EE59025FCE64D00C79013 /* StudentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentModel.swift; sourceTree = "<group>"; };
 		B37EE59625FD204300C79013 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		B37EE59D25FE9C0400C79013 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				B37EE56325FC03C500C79013 /* LoginViewController.swift */,
 				B37EE58C25FCE23900C79013 /* MapViewController.swift */,
 				B37EE59625FD204300C79013 /* ListTableViewController.swift */,
+				B37EE59D25FE9C0400C79013 /* InformationPostingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				B37EE56225FC03C500C79013 /* SceneDelegate.swift in Sources */,
 				B37EE57D25FC1F2800C79013 /* LoginRequest.swift in Sources */,
 				B37EE58125FC20FF00C79013 /* UdacityResponse.swift in Sources */,
+				B37EE59E25FE9C0400C79013 /* InformationPostingViewController.swift in Sources */,
 				B37EE58D25FCE23900C79013 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

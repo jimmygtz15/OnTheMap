@@ -155,7 +155,17 @@
                             <constraint firstItem="ENa-oi-YfP" firstAttribute="trailing" secondItem="VUc-Sk-5ep" secondAttribute="trailing" id="lIP-5L-KzW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="On The Map" id="pJ9-lP-BkW"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="pJ9-lP-BkW">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="xk4-82-hmM"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="icon_refresh" id="yBa-hu-PTF"/>
+                            <barButtonItem title="Item" image="icon_addpin" id="qai-Ar-aFI">
+                                <connections>
+                                    <segue destination="QAG-91-TzF" kind="presentation" id="fuS-az-Q11"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="VUc-Sk-5ep" id="TkW-f7-bHW"/>
                     </connections>
@@ -226,7 +236,17 @@
                             <outlet property="delegate" destination="HPz-Sg-yve" id="CvS-A8-xfp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="On The Map" id="h4w-eW-IRZ"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="h4w-eW-IRZ">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Dso-pt-WXs"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="icon_refresh" id="f4F-n8-1hL"/>
+                            <barButtonItem title="Item" image="icon_addpin" id="A2x-2w-Hmk">
+                                <connections>
+                                    <segue destination="QAG-91-TzF" kind="presentation" id="7O4-DI-xYO"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="studentListTableView" destination="jWE-ai-Z6n" id="wj9-V0-aXC"/>
                     </connections>
@@ -234,6 +254,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="38x-ny-8Tt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2690" y="452"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Zl5-Mh-eFq">
+            <objects>
+                <navigationController id="QAG-91-TzF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="maa-PN-W2K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="jaK-TL-239" kind="relationship" relationship="rootViewController" id="Adg-DX-Ls3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZJI-sc-Fnr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3607" y="191"/>
+        </scene>
+        <!--Information Posting View Controller-->
+        <scene sceneID="cUE-Fx-HVO">
+            <objects>
+                <viewController id="jaK-TL-239" customClass="InformationPostingViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Iom-Wo-0Ub">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ZnY-rd-YSJ"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5XK-U9-JJf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jtj-Zm-BDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4325" y="191"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Z5I-Eo-Vmm">
+            <objects>
+                <viewController id="2fU-uB-RsF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wG6-29-vjM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Sz8-oi-SQZ"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n0K-ew-PlA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5036" y="191"/>
         </scene>
         <!--List-->
         <scene sceneID="trr-7f-LHa">
@@ -253,16 +320,27 @@
             <point key="canvasLocation" x="1800" y="452"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7O4-DI-xYO"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="icon_addpin" width="24" height="24"/>
         <image name="icon_listview-deselected" width="75" height="50"/>
         <image name="icon_mapview-deselected" width="75" height="50"/>
         <image name="icon_pin" width="24" height="24"/>
+        <image name="icon_refresh" width="24" height="24"/>
         <image name="logo-u" width="62" height="62"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
