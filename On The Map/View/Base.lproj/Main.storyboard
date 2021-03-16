@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -271,21 +272,74 @@
             </objects>
             <point key="canvasLocation" x="3607" y="191"/>
         </scene>
-        <!--Information Posting View Controller-->
+        <!--Add Location-->
         <scene sceneID="cUE-Fx-HVO">
             <objects>
                 <viewController id="jaK-TL-239" customClass="InformationPostingViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iom-Wo-0Ub">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="HPc-jg-RoL">
+                                <rect key="frame" x="87" y="106" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="nd1-IB-RFq"/>
+                                    <constraint firstAttribute="height" constant="128" id="ouz-XX-DAW"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IzY-jf-4a6">
+                                <rect key="frame" x="30" y="296" width="354" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Dud-yw-L2d"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Website" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0HC-Ki-3F4">
+                                <rect key="frame" x="30" y="354" width="354" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5Fu-Tw-6al"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmT-rx-mdx">
+                                <rect key="frame" x="30" y="412" width="354" height="50"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="FIND LOCATION">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ZnY-rd-YSJ"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IzY-jf-4a6" firstAttribute="top" secondItem="HPc-jg-RoL" secondAttribute="bottom" constant="62" id="0Ij-qb-n8p"/>
+                            <constraint firstItem="kmT-rx-mdx" firstAttribute="height" secondItem="0HC-Ki-3F4" secondAttribute="height" id="DTk-ul-adP"/>
+                            <constraint firstItem="IzY-jf-4a6" firstAttribute="leading" secondItem="ZnY-rd-YSJ" secondAttribute="leading" constant="30" id="FfJ-81-mdg"/>
+                            <constraint firstItem="HPc-jg-RoL" firstAttribute="centerX" secondItem="Iom-Wo-0Ub" secondAttribute="centerX" id="GjO-Iq-oqd"/>
+                            <constraint firstItem="ZnY-rd-YSJ" firstAttribute="trailing" secondItem="kmT-rx-mdx" secondAttribute="trailing" constant="30" id="Jkm-aC-VT4"/>
+                            <constraint firstItem="kmT-rx-mdx" firstAttribute="top" secondItem="0HC-Ki-3F4" secondAttribute="bottom" constant="8" symbolic="YES" id="KDn-pb-WDe"/>
+                            <constraint firstItem="0HC-Ki-3F4" firstAttribute="leading" secondItem="ZnY-rd-YSJ" secondAttribute="leading" constant="30" id="L7P-m5-soE"/>
+                            <constraint firstItem="ZnY-rd-YSJ" firstAttribute="trailing" secondItem="0HC-Ki-3F4" secondAttribute="trailing" constant="30" id="WeQ-2T-MaT"/>
+                            <constraint firstItem="kmT-rx-mdx" firstAttribute="leading" secondItem="ZnY-rd-YSJ" secondAttribute="leading" constant="30" id="YEm-fh-Yyd"/>
+                            <constraint firstItem="0HC-Ki-3F4" firstAttribute="top" secondItem="IzY-jf-4a6" secondAttribute="bottom" constant="8" symbolic="YES" id="l1t-lq-JKf"/>
+                            <constraint firstItem="HPc-jg-RoL" firstAttribute="top" secondItem="ZnY-rd-YSJ" secondAttribute="top" constant="50" id="lmm-8f-fHN"/>
+                            <constraint firstItem="ZnY-rd-YSJ" firstAttribute="trailing" secondItem="IzY-jf-4a6" secondAttribute="trailing" constant="30" id="zcY-Z7-65t"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="5XK-U9-JJf"/>
+                    <navigationItem key="navigationItem" title="Add Location" id="5XK-U9-JJf">
+                        <barButtonItem key="leftBarButtonItem" title="CANCEL" id="R5M-JJ-fpQ">
+                            <connections>
+                                <action selector="cancelButton:" destination="jaK-TL-239" id="uLo-DV-Ai0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtj-Zm-BDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4325" y="191"/>
+            <point key="canvasLocation" x="4324.6376811594209" y="190.84821428571428"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Z5I-Eo-Vmm">
@@ -329,15 +383,16 @@
         <image name="icon_mapview-deselected" width="75" height="50"/>
         <image name="icon_pin" width="24" height="24"/>
         <image name="icon_refresh" width="24" height="24"/>
+        <image name="icon_world" width="52" height="67"/>
         <image name="logo-u" width="62" height="62"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
