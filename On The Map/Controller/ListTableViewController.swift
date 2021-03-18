@@ -14,26 +14,23 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getStudentsList()
-        print(students)
-        print("HERE ARE THE STUDENTS")
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    // MARK: - Student list
-    func getStudentsList() {
-        //activityIndicatorWillShow()
-        UdacityClient.getStudentLocation() {students, error in
-            self.students = students
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                //self.activityIndicatorWillHide()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        StudentModel.updateStudents { (success) in
+            if success {
+                self.students = StudentModel.students
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    //self.activityIndicatorWillHide()
+                }
+            } else {
+                self.showAlert(message: "Failed loading students", title: "Error")
             }
         }
     }
+
     // MARK: - Activity Indicator
 //    func activityIndicatorWillShow() {
 //        activityIndicator.startAnimating()

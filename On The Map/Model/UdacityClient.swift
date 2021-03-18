@@ -22,6 +22,9 @@ class UdacityClient {
         static let base = "https://onthemap-api.udacity.com/v1"
         case login
         case location
+        case addLocation
+        case updateLocation
+        case getLoggedInUserProfile
         
         var stringValue: String {
             switch self {
@@ -29,6 +32,12 @@ class UdacityClient {
                 return Endpoints.base + "/session"
             case .location:
                 return Endpoints.base + "/StudentLocation"
+            case .addLocation:
+                return Endpoints.base + "/StudentLocation"
+            case .updateLocation:
+                return Endpoints.base + "/StudentLocation/" + Auth.objectId
+            case .getLoggedInUserProfile:
+                return Endpoints.base + "/users/" + Auth.key
             }
         }
         var url: URL {
@@ -124,11 +133,11 @@ class UdacityClient {
             if let response = response {
                 Auth.sessionId = response.session.id
                 Auth.key = response.account.key
-//                getLoggedInUserProfile(completion: { (success, error) in
-//                    if success {
-//                        print("Logged in user's profile.")
-//                    }
-//                })
+                getLoggedInUserProfile(completion: { (success, error) in
+                    if success {
+                        print("Logged in user's profile.")
+                    }
+                })
                 print(response)
                 completion(true, nil)
                 print("RESPONSE")
@@ -140,8 +149,27 @@ class UdacityClient {
     }
     
     
+    // MARK: Get Logged In User's Name
     
-    class func getStudentLocation(completion: @escaping ([Result], Error?) -> Void) {
+    class func getLoggedInUserProfile(completion: @escaping (Bool, Error?) -> Void) {
+        UdacityClient.taskForGETRequest(url: Endpoints.getLoggedInUserProfile.url
+                                        , responseType: UserProfile.self) { (profile, error) in
+            if let profile = profile {
+                Auth.firstName = profile.firstName
+                Auth.lastName = profile.lastName
+                completion(true, nil)
+            } else {
+                print("Failed to get user's profile.")
+              completion(false, error)
+
+            }
+        }
+    
+    }
+    
+    
+    
+    class func getStudentLocation(completion: @escaping ([Student], Error?) -> Void) {
         
         taskForGETRequest(url: Endpoints.location.url, responseType: StudentLocation.self) { response, error in
             if let response = response {
@@ -153,6 +181,30 @@ class UdacityClient {
         }
         
     }
+    
+    
+    class func addStudentLocation(information: Student, completion: @escaping (Bool, Error?) -> Void) {
+        let body = "{\"uniqueKey\": \"\(information.uniqueKey ?? "")\", \"firstName\": \"\(information.firstName)\", \"lastName\": \"\(information.lastName)\",\"mapString\": \"\(information.mapString ?? "")\", \"mediaURL\": \"\(information.mediaURL ?? "")\",\"latitude\": \(information.latitude ?? 0.0), \"longitude\": \(information.longitude ?? 0.0)}"
+        UdacityClient.taskForPOSTRequest(url: Endpoints.addLocation.url, apiType: "Parse", responseType: PostLocationResponse.self, body: body, httpMethod: "POST") { (response, error) in
+            if let response = response, response.createdAt != nil {
+                Auth.objectId = response.objectId ?? ""
+                completion(true, nil)
+            }
+            completion(false, error)
+        }
+    }
+    
+    class func updateStudentLocation(information: Student, completion: @escaping (Bool, Error?) -> Void) {
+        let body = "{\"uniqueKey\": \"\(information.uniqueKey ?? "")\", \"firstName\": \"\(information.firstName)\", \"lastName\": \"\(information.lastName)\",\"mapString\": \"\(information.mapString ?? "")\", \"mediaURL\": \"\(information.mediaURL ?? "")\",\"latitude\": \(information.latitude ?? 0.0), \"longitude\": \(information.longitude ?? 0.0)}"
+        UdacityClient.taskForPOSTRequest(url: Endpoints.updateLocation.url, apiType: "Parse", responseType: UpdateLocationResponse.self, body: body, httpMethod: "PUT") { (response, error) in
+            if let response = response, response.updatedAt != nil {
+                completion(true, nil)
+            }
+            completion(false, error)
+        }
+    }
+    
+    
     
     
 }

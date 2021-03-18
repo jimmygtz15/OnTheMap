@@ -23,12 +23,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UdacityClient.getStudentLocation() { student, error in
-            StudentModel.students = student
-            print(StudentModel.students)
-            print("HERE IS THE STUDENT MODEL")
-//            self.tableView.reloadData()
-        }
+//        UdacityClient.getStudentLocation() { student, error in
+//            StudentModel.students = student
+//            print(StudentModel.students)
+//            print("HERE IS THE STUDENT MODEL")
+////            self.tableView.reloadData()
+//        }
         // Do any additional setup after loading the view.
     }
 
@@ -70,6 +70,10 @@ class LoginViewController: UIViewController {
     }
     
     
+    
+}
+
+extension UIViewController {
     func showAlert(message: String, title: String) {
         DispatchQueue.main.async {
             let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -78,6 +82,6 @@ class LoginViewController: UIViewController {
         }
         
     }
-    
+
 }
 

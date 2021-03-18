@@ -13,11 +13,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+    }
+    
+    func updateStudentData() {
         let locations = StudentModel.students
         var annotations = [MKPointAnnotation]()
         
         for dictionary in locations {
-            
             // Notice that the float values are being used to create CLLocationDegree values.
             // This is a version of the Double type.
             let lat = CLLocationDegrees(dictionary.latitude)
@@ -44,6 +47,50 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.mapView.addAnnotations(annotations)
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        StudentModel.updateStudents { (success) in
+            if success {
+                self.updateStudentData()
+            } else {
+                self.showAlert(message: "Failed loading students", title: "Error")
+            }
+        }
+    }
+    
+//    func getStudentPins(completion: @escaping (Location, error) -> Void  ) {
+//        
+//    }
+    
+//    func getStudentsPins() {
+//       // self.activityIndicator.startAnimating()
+//        UdacityClient.getStudentLocation() { locations, error in
+//            self.mapView.removeAnnotations(self.annotations)
+//            self.annotations.removeAll()
+//            self.locations = locations ?? []
+//            for dictionary in locations ?? [] {
+//                let lat = CLLocationDegrees(dictionary.latitude ?? 0.0)
+//                let long = CLLocationDegrees(dictionary.longitude ?? 0.0)
+//                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//                let first = dictionary.firstName
+//                let last = dictionary.lastName
+//                let mediaURL = dictionary.mediaURL
+//                let annotation = MKPointAnnotation()
+//                annotation.coordinate = coordinate
+//                annotation.title = "\(first) \(last)"
+//                annotation.subtitle = mediaURL
+//                self.annotations.append(annotation)
+//            }
+//            DispatchQueue.main.async {
+//                self.mapView.addAnnotations(self.annotations)
+//                self.activityIndicator.stopAnimating()
+//            }
+//        }
+//    }
+
+    
+    
 
     
     // MARK: - MKMapViewDelegate
