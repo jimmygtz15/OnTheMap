@@ -24,6 +24,17 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        updateStudents()
+    }
+    
+    
+    @IBAction func updateButton(_ sender: Any) {
+        updateStudents()
+    }
+    
+    func updateStudents() {
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         StudentModel.updateStudents { (success) in
             if success {
                 self.students = StudentModel.students
@@ -36,8 +47,20 @@ class ListTableViewController: UITableViewController {
                 self.showAlert(message: "Failed loading students", title: "Error")
             }
         }
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
     }
     
+    
+    @IBAction func logOut(_ sender: Any) {
+        self.activityIndicator.startAnimating()
+        UdacityClient.logOut {
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+                self.activityIndicator.stopAnimating()
+            }
+        }
+    }
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

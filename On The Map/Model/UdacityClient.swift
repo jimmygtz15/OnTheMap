@@ -25,6 +25,7 @@ class UdacityClient {
         case addLocation
         case updateLocation
         case getLoggedInUserProfile
+        case signUp
         
         var stringValue: String {
             switch self {
@@ -38,6 +39,8 @@ class UdacityClient {
                 return Endpoints.base + "/StudentLocation/" + Auth.objectId
             case .getLoggedInUserProfile:
                 return Endpoints.base + "/users/" + Auth.key
+            case .signUp:
+                return "https://auth.udacity.com/sign-up"
             }
         }
         var url: URL {
@@ -51,9 +54,6 @@ class UdacityClient {
         if apiType == "Udacity" {
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        } else {
-            //request.addValue(Constants.ApplicationId, forHTTPHeaderField: "X-Parse-Application-Id")
-            //request.addValue(Constants.APIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         }
         let task = URLSession.shared.dataTask(with: request) { data, response, error  in
             if error != nil {
@@ -156,6 +156,31 @@ class UdacityClient {
                 print("NO RESPONSE")
             }
         }
+    }
+    
+    class func logOut(completion: @escaping () -> Void) {
+        var request = URLRequest(url: Endpoints.login.url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                print("Error logging out.")
+                return
+            }
+            let range = 5..<data!.count
+            let newData = data?.subdata(in: range)
+            print(String(data: newData!, encoding: .utf8)!)
+            Auth.sessionId = ""
+            completion()
+        }
+        task.resume()
     }
     
     

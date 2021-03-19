@@ -72,6 +72,9 @@
                                         <rect key="frame" x="152" y="0.0" width="62" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Sign Up."/>
+                                        <connections>
+                                            <action selector="signUpTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kfn-1U-coC"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -166,9 +169,17 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="pJ9-lP-BkW">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="xk4-82-hmM"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="xk4-82-hmM">
+                            <connections>
+                                <action selector="logOut:" destination="rge-wO-MR2" id="6EO-sp-BZq"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="icon_refresh" id="yBa-hu-PTF"/>
+                            <barButtonItem title="Item" image="icon_refresh" id="yBa-hu-PTF">
+                                <connections>
+                                    <action selector="updateButton:" destination="rge-wO-MR2" id="bLs-6X-7mD"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Item" image="icon_addpin" id="qai-Ar-aFI">
                                 <connections>
                                     <segue destination="QAG-91-TzF" kind="presentation" id="fuS-az-Q11"/>
@@ -248,9 +259,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="On The Map" id="h4w-eW-IRZ">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Dso-pt-WXs"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Dso-pt-WXs">
+                            <connections>
+                                <action selector="logOut:" destination="HPz-Sg-yve" id="Beg-Ww-YDE"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="icon_refresh" id="f4F-n8-1hL"/>
+                            <barButtonItem title="Item" image="icon_refresh" id="f4F-n8-1hL">
+                                <connections>
+                                    <action selector="updateButton:" destination="HPz-Sg-yve" id="u1o-PR-lYQ"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Item" image="icon_addpin" id="A2x-2w-Hmk">
                                 <connections>
                                     <segue destination="QAG-91-TzF" kind="presentation" id="7O4-DI-xYO"/>

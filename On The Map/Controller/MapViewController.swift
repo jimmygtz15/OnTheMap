@@ -17,6 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func updateStudentData() {
+        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         let locations = StudentModel.students
         var annotations = [MKPointAnnotation]()
@@ -42,6 +43,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // When the array is complete, we add the annotations to the map.
         self.mapView.addAnnotations(annotations)
         activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,12 +54,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 self.updateStudentData()
                 self.activityIndicator.stopAnimating()
             } else {
-                self.activityIndicator.stopAnimating()
-                self.showAlert(message: "Failed loading students", title: "Error")
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.showAlert(message: "Failed loading students", title: "Error")
+                }
+                
             }
         }
     }
 
+    @IBAction func updateButton(_ sender: Any) {
+        updateStudentData()
+    }
+    @IBAction func logOut(_ sender: Any) {
+        self.activityIndicator.startAnimating()
+        UdacityClient.logOut {
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+                self.activityIndicator.stopAnimating()
+            }
+        }
+    }
     // MARK:- MKMapViewDelegate
     // Here we create a view with a "right callout accessory view". You might choose to look into other
     // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
@@ -80,7 +97,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         return pinView
     }
-
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {

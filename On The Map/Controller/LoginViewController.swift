@@ -29,6 +29,11 @@ class LoginViewController: UIViewController {
         UdacityClient.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
     }
     
+    @IBAction func signUpTapped(_ sender: Any) {
+        UIApplication.shared.open(UdacityClient.Endpoints.signUp.url, options: [:], completionHandler: nil)
+    }
+    
+    
     func handleLoginResponse(success: Bool, error: Error?) {
         isLoggingIn(false)
         if success {
