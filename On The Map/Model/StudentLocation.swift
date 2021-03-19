@@ -20,11 +20,6 @@ struct Student: Codable {
     let mediaURL: String
     let objectId, uniqueKey, updatedAt: String
 
-//    enum CodingKeys: String, CodingKey {
-//        case createdAt, firstName, lastName, latitude, longitude, mapString, mediaURL
-//        case objectId = "objectId"
-//        case uniqueKey, updatedAt
-//    }
     init(_ dictionary: [String: Any]) {
         self.createdAt = dictionary["createdAt"] as? String ?? ""
         self.uniqueKey = dictionary["uniqueKey"] as? String ?? ""

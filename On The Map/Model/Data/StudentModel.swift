@@ -10,7 +10,6 @@ class StudentModel {
     
     static var students = [Student]()
     
-    
     static func updateStudents(completion: @escaping (Bool) -> Void) {
         UdacityClient.getStudentLocation { (studentList, error) in
             if !studentList.isEmpty {
