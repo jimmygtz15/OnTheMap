@@ -11,9 +11,7 @@ import MapKit
 class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var locationTextField: UITextField!
-    
     @IBOutlet weak var websiteTextField: UITextField!
-    
     @IBOutlet weak var locationButton: UIButton!
     var objectId: String?
     
@@ -22,10 +20,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         locationButton.isEnabled = true
         locationTextField.delegate = self
-        websiteTextField.delegate = self
-        // Do any additional setup after loading the view.
     }
-    
     
     @IBAction func findLocation(_ sender: Any) {
         print("location button")
@@ -41,8 +36,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
     }
     
-    // MARK: Find geocode position
-    
+    // MARK:- Find geocode position
     private func geocodePosition(newLocation: String) {
         CLGeocoder().geocodeAddressString(newLocation) { (newMarker, error) in
             if let error = error {
@@ -67,16 +61,14 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: Push to Final Add Location screen
-    
+    // MARK:- Push to Final Add Location screen
     private func loadNewLocation(_ coordinate: CLLocationCoordinate2D) {
         let controller = storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
         controller.studentInformation = buildStudentInfo(coordinate)
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
-    // MARK: Student info to display on Final Add Location screen
-    
+    // MARK:- Student info to display on Final Add Location screen
     private func buildStudentInfo(_ coordinate: CLLocationCoordinate2D) -> Student {
         
         var studentInfo = [
@@ -87,7 +79,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
             "mediaURL": websiteTextField.text!,
             "latitude": coordinate.latitude,
             "longitude": coordinate.longitude,
-        ] as [String : Any] //as [String: AnyObject]
+        ] as [String : Any]
         
         if let objectId = objectId {
             studentInfo["objectId"] = objectId as Any
@@ -125,15 +117,5 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
             self.locationButton.isEnabled = !loading
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -46,36 +46,48 @@ class UdacityClient {
     }
     
     
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionDataTask {
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+    
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, apiType: String, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        if apiType == "Udacity" {
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        } else {
+            //request.addValue(Constants.ApplicationId, forHTTPHeaderField: "X-Parse-Application-Id")
+            //request.addValue(Constants.APIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error  in
+            if error != nil {
+                completion(nil, error)
+            }
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
                 return
             }
-            let decoder = JSONDecoder()
             do {
-                let responseObject = try decoder.decode(ResponseType.self, from: data)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
+                if apiType == "Udacity" {
+                    let range = 5..<data.count
+                    let newData = data.subdata(in: range)
+                    let responseObject = try JSONDecoder().decode(ResponseType.self, from: newData)
+                    DispatchQueue.main.async {
+                        completion(responseObject, nil)
+                    }
+                } else {
+                    let responseObject = try JSONDecoder().decode(ResponseType.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(responseObject, nil)
+                    }
                 }
             } catch {
-                do {
-//                    let errorResponse = try decoder.decode(TMDBResponse.self, from: data) as Error
-//                    DispatchQueue.main.async {
-//                        completion(nil, errorResponse)
-//                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completion(nil, error)
-                    }
+                DispatchQueue.main.async {
+                    completion(nil, error)
                 }
             }
         }
         task.resume()
-        
-        return task
     }
     
     
@@ -152,7 +164,7 @@ class UdacityClient {
     // MARK: Get Logged In User's Name
     
     class func getLoggedInUserProfile(completion: @escaping (Bool, Error?) -> Void) {
-        UdacityClient.taskForGETRequest(url: Endpoints.getLoggedInUserProfile.url
+        UdacityClient.taskForGETRequest(url: Endpoints.getLoggedInUserProfile.url, apiType: "Udacity"
                                         , responseType: UserProfile.self) { (profile, error) in
             if let profile = profile {
                 Auth.firstName = profile.firstName
@@ -171,7 +183,7 @@ class UdacityClient {
     
     class func getStudentLocation(completion: @escaping ([Student], Error?) -> Void) {
         
-        taskForGETRequest(url: Endpoints.location.url, responseType: StudentLocation.self) { response, error in
+        taskForGETRequest(url: Endpoints.location.url, apiType: "Parse", responseType: StudentLocation.self) { response, error in
             if let response = response {
                 completion(response.results, nil)
 //                print(response.results)

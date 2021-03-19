@@ -10,9 +10,16 @@ import UIKit
 class ListTableViewController: UITableViewController {
     @IBOutlet var studentListTableView: UITableView!
     var students = StudentModel.students
+    
     var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
+        activityIndicator = UIActivityIndicatorView (style: UIActivityIndicatorView.Style.gray)
+        self.view.addSubview(activityIndicator)
+        activityIndicator.bringSubviewToFront(self.view)
+        activityIndicator.center = self.view.center
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         super.viewDidLoad()
     }
     
@@ -23,27 +30,17 @@ class ListTableViewController: UITableViewController {
                 self.students = StudentModel.students
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-                    //self.activityIndicatorWillHide()
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
                 }
             } else {
                 self.showAlert(message: "Failed loading students", title: "Error")
             }
         }
     }
-
-    // MARK: - Activity Indicator
-//    func activityIndicatorWillShow() {
-//        activityIndicator.startAnimating()
-//        activityIndicator.isHidden = false
-//    }
-//    func activityIndicatorWillHide() {
-//        activityIndicator.stopAnimating()
-//        activityIndicator.isHidden = true
-//    }
-
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
@@ -66,7 +63,7 @@ class ListTableViewController: UITableViewController {
     
     func openLink(_ url: String) {
         guard let url = URL(string: url), UIApplication.shared.canOpenURL(url) else {
-//            showAlert(message: "Cannot open link.", title: "Invalid Link")
+            showAlert(message: "Cannot open link.", title: "Invalid Link")
             return
         }
         UIApplication.shared.open(url, options: [:])

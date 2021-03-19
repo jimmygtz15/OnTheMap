@@ -23,13 +23,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        UdacityClient.getStudentLocation() { student, error in
-//            StudentModel.students = student
-//            print(StudentModel.students)
-//            print("HERE IS THE STUDENT MODEL")
-////            self.tableView.reloadData()
-//        }
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {

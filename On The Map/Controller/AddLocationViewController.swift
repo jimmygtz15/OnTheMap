@@ -33,12 +33,10 @@ class AddLocationViewController: UIViewController {
             )
             showLocations(location: studentLocation)
         }
-        // Do any additional setup after loading the view.
     }
     
     
     @IBAction func finishButton(_ sender: Any) {
-        
         self.setLoading(true)
         if let studentLocation = studentInformation {
             if UdacityClient.Auth.objectId == "" {
@@ -83,21 +81,8 @@ class AddLocationViewController: UIViewController {
         }
         
     }
-    
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    // MARK: New location in map
-    
+    // MARK:- New location in map
     private func showLocations(location: Location) {
         mapView.removeAnnotations(mapView.annotations)
         if let coordinate = extractCoordinate(location: location) {
@@ -117,8 +102,7 @@ class AddLocationViewController: UIViewController {
         return nil
     }
     
-    // MARK: Loading state
-    
+    // MARK:- Loading state
     func setLoading(_ loading: Bool) {
         if loading {
             DispatchQueue.main.async {

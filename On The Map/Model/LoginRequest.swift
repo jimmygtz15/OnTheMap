@@ -6,7 +6,6 @@
 //
 
 import Foundation
-// MARK: - Login Request
 struct LoginRequest: Codable {
     
     let udacity: [String:String]

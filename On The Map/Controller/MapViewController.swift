@@ -11,12 +11,14 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
        
     }
     
     func updateStudentData() {
+        activityIndicator.startAnimating()
         let locations = StudentModel.students
         var annotations = [MKPointAnnotation]()
         
@@ -45,15 +47,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // When the array is complete, we add the annotations to the map.
         self.mapView.addAnnotations(annotations)
+        activityIndicator.stopAnimating()
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        activityIndicator.startAnimating()
         StudentModel.updateStudents { (success) in
             if success {
                 self.updateStudentData()
+                self.activityIndicator.stopAnimating()
             } else {
+                self.activityIndicator.stopAnimating()
                 self.showAlert(message: "Failed loading students", title: "Error")
             }
         }
