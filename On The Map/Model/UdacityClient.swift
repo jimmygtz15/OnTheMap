@@ -44,9 +44,7 @@ class UdacityClient {
             return URL(string: stringValue)!
         }
     }
-    
-    
-    
+    // MARK:- Get Request
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, apiType: String, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -161,8 +159,7 @@ class UdacityClient {
     }
     
     
-    // MARK: Get Logged In User's Name
-    
+    // MARK:- Get Logged In User's Name
     class func getLoggedInUserProfile(completion: @escaping (Bool, Error?) -> Void) {
         UdacityClient.taskForGETRequest(url: Endpoints.getLoggedInUserProfile.url, apiType: "Udacity"
                                         , responseType: UserProfile.self) { (profile, error) in
@@ -180,7 +177,7 @@ class UdacityClient {
     }
     
     
-    
+    // MARK:- student location
     class func getStudentLocation(completion: @escaping ([Student], Error?) -> Void) {
         
         taskForGETRequest(url: Endpoints.location.url, apiType: "Parse", responseType: StudentLocation.self) { response, error in
@@ -215,8 +212,4 @@ class UdacityClient {
             completion(false, error)
         }
     }
-    
-    
-    
-    
 }

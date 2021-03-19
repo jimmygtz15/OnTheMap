@@ -10,7 +10,6 @@ import UIKit
 class ListTableViewController: UITableViewController {
     @IBOutlet var studentListTableView: UITableView!
     var students = StudentModel.students
-    
     var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {

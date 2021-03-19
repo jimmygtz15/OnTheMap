@@ -16,7 +16,6 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         emailTextField.text = ""
         passwordTextField.text = ""
     }
@@ -65,7 +64,7 @@ class LoginViewController: UIViewController {
     
     
 }
-
+// MARK:- Extension
 extension UIViewController {
     func showAlert(message: String, title: String) {
         DispatchQueue.main.async {
