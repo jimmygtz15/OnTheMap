@@ -14,7 +14,7 @@ class ListTableViewController: UITableViewController {
     var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
-        activityIndicator = UIActivityIndicatorView (style: UIActivityIndicatorView.Style.gray)
+        activityIndicator = UIActivityIndicatorView (style: UIActivityIndicatorView.Style.medium)
         self.view.addSubview(activityIndicator)
         activityIndicator.bringSubviewToFront(self.view)
         activityIndicator.center = self.view.center
