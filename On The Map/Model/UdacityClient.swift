@@ -32,9 +32,9 @@ class UdacityClient {
             case .login:
                 return Endpoints.base + "/session"
             case .location:
-                return Endpoints.base + "/StudentLocation"
+                return Endpoints.base + "/StudentLocation?limit=100"
             case .addLocation:
-                return Endpoints.base + "/StudentLocation"
+                return Endpoints.base + "/StudentLocation?limit=100"
             case .updateLocation:
                 return Endpoints.base + "/StudentLocation/" + Auth.objectId
             case .getLoggedInUserProfile:
