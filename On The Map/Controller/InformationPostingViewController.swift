@@ -9,7 +9,6 @@ import UIKit
 import MapKit
 
 class InformationPostingViewController: UIViewController, UITextFieldDelegate {
-
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var websiteTextField: UITextField!
     @IBOutlet weak var locationButton: UIButton!
@@ -18,9 +17,25 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil);
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil);
         locationButton.isEnabled = true
         locationTextField.delegate = self
     }
+    @objc func keyboardWillShow(sender: NSNotification) {
+         self.view.frame.origin.y = -150 
+    }
+
+    @objc func keyboardWillHide(sender: NSNotification) {
+         self.view.frame.origin.y = 0
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
     
     @IBAction func findLocation(_ sender: Any) {
         print("location button")
@@ -48,10 +63,12 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
                 
                 if let marker = newMarker, marker.count > 0 {
                     location = marker.first?.location
+                    self.isLoading(false)
                 }
                 
                 if let location = location {
                     self.loadNewLocation(location.coordinate)
+                    self.isLoading(false)
                 } else {
                     self.showAlert(message: "Please try again later.", title: "Error")
                     self.isLoading(false)
