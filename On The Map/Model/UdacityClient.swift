@@ -137,7 +137,29 @@ class UdacityClient {
         task.resume()
     }
     // MARK: - Login
-    class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+//    class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+//        let body = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
+//        taskForPOSTRequest(url: Endpoints.login.url, apiType: "Udacity", responseType: UdacityResponse.self, body: body, httpMethod: "POST") { (response, error) in
+//            if let response = response {
+//                Auth.sessionId = response.session.id
+//                Auth.key = response.account.key
+//                getLoggedInUserProfile(completion: { (success, error) in
+//                    if success {
+//                        print("Logged in user's profile.")
+//                    }
+//                })
+//                print(response)
+//                completion(true, nil)
+//                print("RESPONSE")
+//            } else {
+//                completion(false, error)
+//
+//                print("NO RESPONSE")
+//            }
+//        }
+//    }
+    
+    class func login(email: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         let body = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}"
         taskForPOSTRequest(url: Endpoints.login.url, apiType: "Udacity", responseType: UdacityResponse.self, body: body, httpMethod: "POST") { (response, error) in
             if let response = response {
@@ -149,14 +171,16 @@ class UdacityClient {
                     }
                 })
                 print(response)
-                completion(true, nil)
+                completion(.success(true))
                 print("RESPONSE")
-            } else {
-                completion(false, nil)
+            } else if let error = error {
+                completion(.failure(error))
                 print("NO RESPONSE")
             }
         }
     }
+    
+    
     
     class func logOut(completion: @escaping () -> Void) {
         var request = URLRequest(url: Endpoints.login.url)

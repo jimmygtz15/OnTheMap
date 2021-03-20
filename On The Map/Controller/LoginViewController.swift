@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func loginButtonTapped(_ sender: Any) {
         isLoggingIn(true)
-        UdacityClient.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
+        UdacityClient.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(result:))
     }
     
     @IBAction func signUpTapped(_ sender: Any) {
@@ -35,14 +35,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func handleLoginResponse(success: Bool, error: Error?) {
+    func handleLoginResponse(result: Result<Bool, Error>) {
         isLoggingIn(false)
-        if success {
+        
+        switch result {
+        case .success:
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "login", sender: nil)
             }
-        } else {
-            showAlert(message: "Please enter valid credentials.", title: "Login Error")
+        case .failure(let myError):
+            if myError._code == -1009 {
+                showAlert(message: myError.localizedDescription, title: "Login Error")
+            } else {
+                showAlert(message: "Please enter valid credentials", title: "Login Error")
+            }
+            
+            
         }
     }
     
